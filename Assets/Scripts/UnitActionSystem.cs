@@ -13,13 +13,19 @@ public class UnitActionSystem : MonoBehaviour {
     [SerializeField]
     private LayerMask unitLayerMask;
 
+    private GridSystem gridSystem;
+
+    [SerializeField]
+    private GameObject gridDebugObjectPrefab;
+
     void Awake() {
 
         Instance = this;
     }
 
     void Start() {
-
+        gridSystem = new GridSystem(10, 10);
+        gridSystem.CreateDebugObject(gridDebugObjectPrefab);
     }
 
     void Update() {
@@ -35,6 +41,8 @@ public class UnitActionSystem : MonoBehaviour {
             selectedUnit.Move(MouseWorld.GetPosition());
 
         }
+
+        Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
     }
 
     bool TryHandleUnitSelection() {
