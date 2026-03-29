@@ -13,10 +13,7 @@ public class UnitActionSystem : MonoBehaviour {
     [SerializeField]
     private LayerMask unitLayerMask;
 
-    private GridSystem gridSystem;
-
-    [SerializeField]
-    private GameObject gridDebugObjectPrefab;
+ 
 
     void Awake() {
 
@@ -24,8 +21,6 @@ public class UnitActionSystem : MonoBehaviour {
     }
 
     void Start() {
-        gridSystem = new GridSystem(10, 10);
-        gridSystem.CreateDebugObject(gridDebugObjectPrefab);
     }
 
     void Update() {
@@ -38,11 +33,16 @@ public class UnitActionSystem : MonoBehaviour {
         }
 
         if (selectedUnit != null) {
-            selectedUnit.Move(MouseWorld.GetPosition());
+            GridPosition mouseGridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
+            if (!LevelGrid.Instance.IsValidGridPosition(mouseGridPosition)) {
+                return;
+            }
+
+            Vector3 targetWorldPosition = LevelGrid.Instance.GetWorldPosition(mouseGridPosition);
+            selectedUnit.Move(targetWorldPosition);
 
         }
 
-        Debug.Log(gridSystem.GetGridPosition(MouseWorld.GetPosition()));
     }
 
     bool TryHandleUnitSelection() {

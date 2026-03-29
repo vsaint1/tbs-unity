@@ -15,11 +15,13 @@ public class GridDebugObject : MonoBehaviour {
     }
 
     void Update() {
-
+        if (gridObject != null) {
+            textMeshPro.text = gridObject.ToString();
+        }
     }
 
     public void SetGridObject(GridObject gridObject) {
         this.gridObject = gridObject;
-        textMeshPro.text = this.gridObject.GridPosition.ToString();
+        textMeshPro.text = this.gridObject.ToString();
     }
 }

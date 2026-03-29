@@ -5,6 +5,8 @@ public class Unit : MonoBehaviour {
 
     private Vector3 targetPosition;
 
+    private GridPosition gridPosition;
+
     private readonly float moveSpeed = 5f;
 
     [SerializeField]
@@ -15,7 +17,9 @@ public class Unit : MonoBehaviour {
     }
 
     void Start() {
+        gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
 
+        LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
     }
 
     void Update() {
@@ -39,6 +43,12 @@ public class Unit : MonoBehaviour {
         else {
             animator.SetBool("IsMoving", false);
 
+        }
+
+        GridPosition newGridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
+        if (!newGridPosition.Equals(gridPosition)) {
+            LevelGrid.Instance.UnitMovedGridPosition(this, gridPosition, newGridPosition);
+            gridPosition = newGridPosition;
         }
 
     }

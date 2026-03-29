@@ -1,19 +1,40 @@
 
 
+using System;
 using UnityEngine;
 
 
-public struct GridPosition {
-    public int x;
-    public int z;
+public struct GridPosition : IEquatable<GridPosition> {
+    public int X;
+    public int Z;
 
     public GridPosition(int x, int z) {
-        this.x = x;
-        this.z = z;
+        X = x;
+        Z = z;
     }
 
     public override readonly string ToString() {
-        return $"({x}, {z})";
+        return $"({X}, {Z})";
+    }
+
+    public bool Equals(GridPosition other) {
+        return X == other.X && Z == other.Z;
+    }
+
+    public override bool Equals(object obj) {
+        return obj is GridPosition position && Equals(position);
+    }
+
+    public override int GetHashCode() {
+        return HashCode.Combine(X, Z);
+    }
+
+    public static bool operator ==(GridPosition left, GridPosition right) {
+        return left.Equals(right);
+    }
+
+    public static bool operator !=(GridPosition left, GridPosition right) {
+        return !(left == right);
     }
 }
 
@@ -46,7 +67,7 @@ public class GridSystem {
 
 
     public Vector3 GetWorldPosition(GridPosition gridPosition) {
-        return new Vector3(gridPosition.x, 0, gridPosition.z) * cellSize;
+        return new Vector3(gridPosition.X, 0, gridPosition.Z) * cellSize;
     }
 
 
@@ -73,6 +94,13 @@ public class GridSystem {
     }
 
     public GridObject GetGridObject(GridPosition gridPosition) {
-        return gridObjectArray[gridPosition.x, gridPosition.z];
+        return gridObjectArray[gridPosition.X, gridPosition.Z];
+    }
+
+    public bool IsValidGridPosition(GridPosition gridPosition) {
+        return gridPosition.X >= 0 &&
+               gridPosition.Z >= 0 &&
+               gridPosition.X < width &&
+               gridPosition.Z < height;
     }
 }
