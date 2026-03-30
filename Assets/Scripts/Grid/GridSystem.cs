@@ -36,21 +36,25 @@ public struct GridPosition : IEquatable<GridPosition> {
     public static bool operator !=(GridPosition left, GridPosition right) {
         return !(left == right);
     }
+
+    public static GridPosition operator +(GridPosition a, GridPosition b) {
+        return new GridPosition(a.X + b.X, a.Z + b.Z);
+    }
 }
 
 
 public class GridSystem {
 
 
-    private int width;
-    private int height;
+    public int Width;
+    public int Height;
     private const float cellSize = 2f;
 
     private GridObject[,] gridObjectArray;
 
     public GridSystem(int width, int height) {
-        this.width = width;
-        this.height = height;
+        Width = width;
+        Height = height;
 
         gridObjectArray = new GridObject[width, height];
 
@@ -80,8 +84,8 @@ public class GridSystem {
     }
 
     public void CreateDebugObject(GameObject prefab) {
-        for (int x = 0; x < width; x++) {
-            for (int z = 0; z < height; z++) {
+        for (int x = 0; x < Width; x++) {
+            for (int z = 0; z < Height; z++) {
                 var gridPosition = new GridPosition(x, z);
                 var worldPosition = GetWorldPosition(gridPosition);
                 var debugObject = GameObject.Instantiate(prefab, worldPosition, Quaternion.identity);
@@ -100,7 +104,9 @@ public class GridSystem {
     public bool IsValidGridPosition(GridPosition gridPosition) {
         return gridPosition.X >= 0 &&
                gridPosition.Z >= 0 &&
-               gridPosition.X < width &&
-               gridPosition.Z < height;
+               gridPosition.X < Width &&
+               gridPosition.Z < Height;
     }
+
+    
 }

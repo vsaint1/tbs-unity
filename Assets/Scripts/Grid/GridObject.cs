@@ -31,6 +31,9 @@ public class GridObject {
     //     units.Clear();
     // }
 
+    public bool HasAnyUnit() {
+        return units.Count > 0;
+    }
 
     public override string ToString() {
 
@@ -42,4 +45,5 @@ public class GridObject {
         return $"{GridPosition}\n {str}";
 
     }
+
 }
