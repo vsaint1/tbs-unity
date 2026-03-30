@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -12,8 +13,12 @@ public class UnitActionSystemUI : MonoBehaviour {
     [SerializeField]
     private Transform actionButtonsContainer;
 
+    [SerializeField]
+    private TextMeshProUGUI actionPointsTMP;
+
     void Start() {
         UnitActionSystem.Instance.OnSelectedUnitChanged += UAS_OnSelectedUnitChanged;
+        UnitActionSystem.Instance.OnActionStarted += UAS_OnActionStarted;
     }
 
     void Update() {
@@ -26,6 +31,7 @@ public class UnitActionSystemUI : MonoBehaviour {
         }
 
         Unit unit = UnitActionSystem.Instance.GetSelectedUnit();
+        actionPointsTMP.text = $"Action Points: {unit.GetActionPoints()}";
 
         foreach (BaseAction action in unit.GetActions()) {
             GameObject actionButtonGameObject = Instantiate(actionButtonPrefab);
@@ -40,5 +46,9 @@ public class UnitActionSystemUI : MonoBehaviour {
 
     void UAS_OnSelectedUnitChanged(object sender, EventArgs e) {
         CreateUnitActionButtons();
+    }
+
+    void UAS_OnActionStarted(object sender, EventArgs e) {
+        actionPointsTMP.text = $"Action Points: {UnitActionSystem.Instance.GetSelectedUnit().GetActionPoints()}";
     }
 }

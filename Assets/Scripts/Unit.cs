@@ -6,6 +6,15 @@ public class Unit : MonoBehaviour {
 
     private GridPosition gridPosition;
 
+    [SerializeField]
+    private int health = 100;
+
+    [SerializeField]
+    private int maxHealth = 100;
+
+    [SerializeField]
+    private int actionPoints = 2;
+
     private MoveAction moveAction;
     private SpinAction spinAction;
 
@@ -50,4 +59,26 @@ public class Unit : MonoBehaviour {
         return gridPosition;
     }
 
+    public void TakeDamage(int damageAmount) {
+        health -= damageAmount;
+
+        if (health <= 0) {
+            Destroy(gameObject);
+        }
+    }
+
+
+    public int GetActionPoints() {
+        return actionPoints;
+    }
+
+    public bool TrySpendActionPoints(BaseAction action) {
+        if (actionPoints >= action.GetActionPointCost()) {
+            actionPoints -= action.GetActionPointCost();
+            return true;
+        }
+
+        Debug.Log("Not enough action points!");
+        return false;
+    }
 }

@@ -1,6 +1,7 @@
 
 
 
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -34,8 +35,16 @@ public class SpinAction : BaseAction {
     public override void TakeAction(GridPosition gridPosition) {
         Spin();
     }
-    
+
     public override string GetActionName() {
         return "Spin";
+    }
+
+    public override int GetActionPointCost() {
+        return 2;
+    }
+
+    public override List<GridPosition> GetValidActionGridPositionList() {
+        return new List<GridPosition>() { Unit.GetGridPosition() };
     }
 }
