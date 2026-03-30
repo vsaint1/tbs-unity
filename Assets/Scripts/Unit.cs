@@ -3,6 +3,8 @@ using UnityEngine;
 public class Unit : MonoBehaviour {
 
 
+    private const int ACTION_POINTS_MAX = 2;
+
 
     private GridPosition gridPosition;
 
@@ -13,7 +15,7 @@ public class Unit : MonoBehaviour {
     private int maxHealth = 100;
 
     [SerializeField]
-    private int actionPoints = 2;
+    private int actionPoints = ACTION_POINTS_MAX;
 
     private MoveAction moveAction;
     private SpinAction spinAction;
@@ -29,6 +31,8 @@ public class Unit : MonoBehaviour {
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
 
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
+
+        TurnSystem.Instance.OnTurnChanged += TS_OnTurnChanged;
     }
 
     void Update() {
@@ -80,5 +84,9 @@ public class Unit : MonoBehaviour {
 
         Debug.Log("Not enough action points!");
         return false;
+    }
+
+    void TS_OnTurnChanged(object sender, System.EventArgs e) {
+        actionPoints = ACTION_POINTS_MAX;
     }
 }

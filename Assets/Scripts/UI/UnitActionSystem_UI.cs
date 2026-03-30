@@ -19,6 +19,7 @@ public class UnitActionSystemUI : MonoBehaviour {
     void Start() {
         UnitActionSystem.Instance.OnSelectedUnitChanged += UAS_OnSelectedUnitChanged;
         UnitActionSystem.Instance.OnActionStarted += UAS_OnActionStarted;
+        TurnSystem.Instance.OnTurnChanged += TS_OnTurnChanged; /// NOTE: this can have order issues
     }
 
     void Update() {
@@ -44,11 +45,19 @@ public class UnitActionSystemUI : MonoBehaviour {
     }
 
 
+    void UpdatePointsText() {
+        actionPointsTMP.text = $"Action Points: {UnitActionSystem.Instance.GetSelectedUnit().GetActionPoints()}";
+    }
+
     void UAS_OnSelectedUnitChanged(object sender, EventArgs e) {
         CreateUnitActionButtons();
     }
 
     void UAS_OnActionStarted(object sender, EventArgs e) {
-        actionPointsTMP.text = $"Action Points: {UnitActionSystem.Instance.GetSelectedUnit().GetActionPoints()}";
+        UpdatePointsText();
+    }
+
+    void TS_OnTurnChanged(object sender, EventArgs e) {
+        UpdatePointsText();
     }
 }

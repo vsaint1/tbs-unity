@@ -1,10 +1,19 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TurnSystem : MonoBehaviour {
 
+    public static TurnSystem Instance { get; private set; }
 
+    public event EventHandler OnTurnChanged;
+    
+    private int turn = 1;
 
-    private int number = 1;
+    void Awake() {
+        Instance = this;
+    }
 
     void Start() {
 
@@ -14,9 +23,12 @@ public class TurnSystem : MonoBehaviour {
 
     }
 
+    public int GetCurrentTurn() {
+        return turn;
+    }
 
     public void NextTurn() {
-        number++;
-        Debug.Log("Turn: " + number);
+        turn++;
+        OnTurnChanged?.Invoke(this, EventArgs.Empty);
     }
 }
