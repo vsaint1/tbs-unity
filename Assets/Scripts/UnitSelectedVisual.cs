@@ -26,20 +26,25 @@ public class UnitSelectedVisual : MonoBehaviour {
 
     void UAS_OnSelectedUnitChanged(object sender, System.EventArgs e) {
         if (UnitActionSystem.Instance.GetSelectedUnit() == unit) {
-            meshRenderer.enabled = true;
+            if (meshRenderer != null)
+                meshRenderer.enabled = true;
         }
         else {
-            meshRenderer.enabled = false;
+            if (meshRenderer != null)
+
+                meshRenderer.enabled = false;
         }
     }
 
 
     void UpdateVisual() {
         if (UnitActionSystem.Instance.GetSelectedUnit() == unit) {
-            meshRenderer.enabled = true;
+            if (meshRenderer != null)
+                meshRenderer.enabled = true;
         }
         else {
-            meshRenderer.enabled = false;
+            if (meshRenderer != null)
+                meshRenderer.enabled = false;
         }
     }
 }

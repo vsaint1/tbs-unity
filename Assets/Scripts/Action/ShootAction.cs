@@ -32,18 +32,14 @@ public class ShootAction : BaseAction {
 
     void Start() {
     }
-
     void Update() {
         if (!IsActive) return;
 
-        if (targetUnit == null) {
-            Debug.LogError("Target unit is null when trying to look at target!");
-            return;
-        }
-
         switch (state) {
             case State.Aiming:
-                LookAtTarget();
+                if (targetUnit != null)
+                    LookAtTarget();
+
                 stateTimer -= Time.deltaTime;
                 if (stateTimer <= 0f) {
                     state = State.Shooting;
@@ -54,7 +50,9 @@ public class ShootAction : BaseAction {
             case State.Shooting:
                 stateTimer -= Time.deltaTime;
                 if (stateTimer <= 0f) {
-                    Shoot();
+                    if (targetUnit != null)
+                        Shoot();
+
                     state = State.EndingAction;
                     stateTimer = 0.1f;
                 }
@@ -62,13 +60,11 @@ public class ShootAction : BaseAction {
 
             case State.EndingAction:
                 stateTimer -= Time.deltaTime;
-                if (stateTimer <= 0f) {
+                if (stateTimer <= 0f)
                     EndAction();
-                }
                 break;
         }
     }
-
 
     void SpawnShootVFX() {
 
@@ -86,7 +82,7 @@ public class ShootAction : BaseAction {
         Vector3 aimDirection = (targetUnit.transform.position - Unit.transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(aimDirection);
 
-        const float rotateSpeed = 2f;
+        const float rotateSpeed = 5f;
         Unit.transform.rotation = Quaternion.Slerp(
              Unit.transform.rotation,
              targetRotation,
