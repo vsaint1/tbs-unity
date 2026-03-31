@@ -712,7 +712,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5260805100624075796, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -721,7 +721,7 @@ PrefabInstance:
       value: Jeca
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5260805100624075796, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1109,6 +1109,23 @@ MonoBehaviour:
   rotationSpeed: 100
   zoomSpeed: 2
   cinemachineCamera: {fileID: 2017791909}
+--- !u!1 &1093325839 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7752439575101431834, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
+  m_PrefabInstance: {fileID: 8880916082167795596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1093325845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093325839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7a9565a8e9473142baaa5fa8ce48aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinAction
 --- !u!1 &1132978809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2243,7 +2260,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5260805100624075796, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
+    - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -2252,7 +2269,7 @@ PrefabInstance:
       value: Joca
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5260805100624075796, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2408,6 +2425,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2096923134}
+  - component: {fileID: 2096923135}
   m_Layer: 0
   m_Name: EnemySystemAI
   m_TagString: Untagged
@@ -2430,6 +2448,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096923135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096923133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc359fb2d781f7144a1e393a9226dc87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySystemAI
 --- !u!1 &2127619276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2552,7 +2582,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7752439575101431834, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1093325845}
   m_SourcePrefab: {fileID: 100100000, guid: b14e72d6cab393540a981f42fd17b0f1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

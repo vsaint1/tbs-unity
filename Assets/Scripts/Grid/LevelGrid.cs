@@ -65,6 +65,11 @@ public class LevelGrid : MonoBehaviour {
         AddUnitAtGridPosition(to, unit);
     }
 
+    public Unit GetUnitAtGridPosition(GridPosition gridPosition, int index) {
+        GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+        return gridObject.GetUnit(index);
+    }
+    
     public int GetWidth() {
         return gridSystem.Width;
     }

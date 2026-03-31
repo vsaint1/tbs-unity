@@ -69,6 +69,7 @@ public class Unit : MonoBehaviour {
     public void TakeDamage(int damageAmount) {
         health -= damageAmount;
 
+        Debug.Log($"Unit {name} took {damageAmount} damage, health is now {health}");
         if (health <= 0) {
             Destroy(gameObject);
         }
