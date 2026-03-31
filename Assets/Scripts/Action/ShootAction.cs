@@ -19,10 +19,15 @@ public class ShootAction : BaseAction {
     private State state;
 
     private Unit targetUnit;
-    
+
     [SerializeField]
     private Animator animator;
 
+    [SerializeField]
+    private GameObject bulletProjectilePrefab;
+
+    [SerializeField]
+    private Transform shootPointTransform;
 
 
     void Start() {
@@ -64,7 +69,19 @@ public class ShootAction : BaseAction {
         }
     }
 
-    private void LookAtTarget() {
+
+    void SpawnShootVFX() {
+
+        GameObject bulletObject = Instantiate(bulletProjectilePrefab, shootPointTransform.position, Quaternion.identity);
+
+        BulletProjectile bulletProjectile = bulletObject.GetComponent<BulletProjectile>();
+
+        bulletProjectile.SetTarget(targetUnit.transform.position + Vector3.up * 1.5f);
+
+
+    }
+
+    void LookAtTarget() {
 
         Vector3 aimDirection = (targetUnit.transform.position - Unit.transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(aimDirection);
@@ -121,6 +138,7 @@ public class ShootAction : BaseAction {
 
     void Shoot() {
         animator.SetTrigger("Shoot");
+        SpawnShootVFX();
         targetUnit.TakeDamage(40);
 
     }
