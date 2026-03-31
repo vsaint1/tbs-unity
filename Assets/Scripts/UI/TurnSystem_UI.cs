@@ -11,6 +11,9 @@ public class TurnSystemUI : MonoBehaviour {
     [SerializeField]
     private TextMeshProUGUI turnTextTMP;
 
+    [SerializeField]
+    private TextMeshProUGUI turnIndicatorTMP;
+
 
 
     void Start() {
@@ -19,6 +22,7 @@ public class TurnSystemUI : MonoBehaviour {
         TurnSystem.Instance.OnTurnChanged += TS_OnTurnChanged;
         endTurnButton.onClick.AddListener(CallNextTurn);
         UpdateTurnText();
+        UpdateTurnIndicator();
     }
 
     void Update() {
@@ -33,9 +37,15 @@ public class TurnSystemUI : MonoBehaviour {
         turnTextTMP.text = "Turn: " + TurnSystem.Instance.GetCurrentTurn();
     }
 
+    void UpdateTurnIndicator() {
+        turnIndicatorTMP.text = TurnSystem.Instance.IsPlayerTurn() ? "It's Your Turn!" : "Unit_Enemy is Playing!";
+        turnIndicatorTMP.color = TurnSystem.Instance.IsPlayerTurn() ? Color.seaGreen : Color.red;
+    }
+
 
     void TS_OnTurnChanged(object sender, System.EventArgs e) {
         UpdateTurnText();
+        UpdateTurnIndicator();
     }
 
 

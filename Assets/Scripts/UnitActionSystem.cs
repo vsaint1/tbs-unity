@@ -32,13 +32,25 @@ public class UnitActionSystem : MonoBehaviour {
 
     void Update() {
 
+
+
         if (isBusy) {
             return;
         }
 
+        if (!TurnSystem.Instance.IsPlayerTurn()) {
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            SetSelectedAction(null);
+        }
+
+
         if (EventSystem.current.IsPointerOverGameObject()) {
             return;
         }
+
 
         if (Input.GetMouseButtonDown(0)) {
 
@@ -90,6 +102,10 @@ public class UnitActionSystem : MonoBehaviour {
             if (hitInfo.transform.TryGetComponent<Unit>(out Unit unit)) {
 
                 if (unit == selectedUnit) {
+                    return false;
+                }
+
+                if (unit.IsEnemy()) {
                     return false;
                 }
 

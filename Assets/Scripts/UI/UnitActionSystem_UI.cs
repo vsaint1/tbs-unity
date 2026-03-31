@@ -20,6 +20,7 @@ public class UnitActionSystemUI : MonoBehaviour {
         UnitActionSystem.Instance.OnSelectedUnitChanged += UAS_OnSelectedUnitChanged;
         UnitActionSystem.Instance.OnActionStarted += UAS_OnActionStarted;
         TurnSystem.Instance.OnTurnChanged += TS_OnTurnChanged; /// NOTE: this can have order issues
+        actionPointsTMP.enabled = false;
     }
 
     void Update() {
@@ -45,12 +46,15 @@ public class UnitActionSystemUI : MonoBehaviour {
     }
 
 
+
     void UpdatePointsText() {
         actionPointsTMP.text = $"Action Points: {UnitActionSystem.Instance.GetSelectedUnit().GetActionPoints()}";
     }
 
     void UAS_OnSelectedUnitChanged(object sender, EventArgs e) {
+        
         CreateUnitActionButtons();
+        actionPointsTMP.enabled = UnitActionSystem.Instance.GetSelectedUnit() != null;
     }
 
     void UAS_OnActionStarted(object sender, EventArgs e) {

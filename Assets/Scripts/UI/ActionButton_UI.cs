@@ -4,13 +4,13 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ActionButtonUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler {
-    private static readonly Color ColorSelected = new Color(0.2f, 0.9f, 0.4f);   // soft green
+    private static readonly Color ColorSelected = Color.seaGreen;
     private static readonly Color ColorHovered = new Color(1f, 1f, 1f);          // white
     private static readonly Color ColorDefault = new Color(0.15f, 0.15f, 0.15f); // near black
 
     private static readonly Vector2 OutlineSelected = new Vector2(4, 4);
     private static readonly Vector2 OutlineHovered = new Vector2(3, 3);
-    private static readonly Vector2 OutlineDefault = new Vector2(2, 2);
+    private static readonly Vector2 OutlineDefault = new Vector2(1,1);
 
     [SerializeField] private TextMeshProUGUI textMeshPro;
     [SerializeField] private Button button;
