@@ -27,8 +27,8 @@ public class CameraController : MonoBehaviour {
         transform.position += moveSpeed * Time.deltaTime * moveVector;
 
         float rotY = 0f;
-        if (Input.GetKey(KeyCode.Q)) rotY -= 1f;
-        if (Input.GetKey(KeyCode.E)) rotY += 1f;
+        if (Input.GetKey(KeyCode.Q)) rotY += 1f;
+        if (Input.GetKey(KeyCode.E)) rotY -= 1f;
         transform.eulerAngles += new Vector3(0f, rotationSpeed * Time.deltaTime * rotY, 0f);
 
         float scroll = Input.mouseScrollDelta.y;

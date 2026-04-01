@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Unit : MonoBehaviour {
 
+    public event EventHandler OnAnyActionPointsChanged;
 
     private const int ACTION_POINTS_MAX = 2;
 
@@ -81,6 +83,7 @@ public class Unit : MonoBehaviour {
     public bool TrySpendActionPoints(BaseAction action) {
         if (actionPoints >= action.GetActionPointCost()) {
             actionPoints -= action.GetActionPointCost();
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
             return true;
         }
 
@@ -93,7 +96,7 @@ public class Unit : MonoBehaviour {
             || (!IsEnemy() && TurnSystem.Instance.IsPlayerTurn())) {
 
             actionPoints = ACTION_POINTS_MAX;
-
+            OnAnyActionPointsChanged?.Invoke(this, EventArgs.Empty);
         }
 
     }

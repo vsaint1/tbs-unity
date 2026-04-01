@@ -50,6 +50,10 @@ public class HealthSystem : MonoBehaviour {
     }
 
 
+    public float GetHealthNormalized() {
+        return health / (float)maxHealth;
+    }
+    
     public void Kill() {
         health = 0;
         OnDead?.Invoke(this, EventArgs.Empty);
