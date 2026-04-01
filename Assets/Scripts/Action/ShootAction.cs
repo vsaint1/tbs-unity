@@ -135,7 +135,7 @@ public class ShootAction : BaseAction {
     void Shoot() {
         animator.SetTrigger("Shoot");
         SpawnShootVFX();
-        targetUnit.TakeDamage(40);
+        targetUnit.TakeDamage(100);
 
     }
 

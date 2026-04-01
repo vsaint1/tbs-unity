@@ -8,11 +8,6 @@ public class Unit : MonoBehaviour {
 
     private GridPosition gridPosition;
 
-    [SerializeField]
-    private int health = 100;
-
-    [SerializeField]
-    private int maxHealth = 100;
 
     [SerializeField]
     private bool isEnemy;
@@ -20,6 +15,7 @@ public class Unit : MonoBehaviour {
     [SerializeField]
     private int actionPoints = ACTION_POINTS_MAX;
 
+    public HealthSystem HealthSystem { get; private set; }
     private MoveAction moveAction;
     private SpinAction spinAction;
 
@@ -30,12 +26,15 @@ public class Unit : MonoBehaviour {
         moveAction = GetComponent<MoveAction>();
         spinAction = GetComponent<SpinAction>();
         actions = GetComponents<BaseAction>();
+        HealthSystem = GetComponent<HealthSystem>();
 
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
 
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
 
         TurnSystem.Instance.OnTurnChanged += TS_OnTurnChanged;
+
+        HealthSystem.OnDead += HS_OnDead;
     }
 
     void Update() {
@@ -67,12 +66,8 @@ public class Unit : MonoBehaviour {
     }
 
     public void TakeDamage(int damageAmount) {
-        health -= damageAmount;
-
-        Debug.Log($"Unit {name} took {damageAmount} damage, health is now {health}");
-        if (health <= 0) {
-            Destroy(gameObject);
-        }
+        HealthSystem.Damage(damageAmount);
+        Debug.Log($"Unit {name} took {damageAmount} damage, health is now {HealthSystem.GetHealth()}");
     }
 
     public bool IsEnemy() {
@@ -89,7 +84,7 @@ public class Unit : MonoBehaviour {
             return true;
         }
 
-        Debug.Log("Not enough action points!");
+        Debug.Log($"Not enough action points! Current: {actionPoints}, required: {action.GetActionPointCost()}");
         return false;
     }
 
@@ -101,5 +96,15 @@ public class Unit : MonoBehaviour {
 
         }
 
+    }
+
+    void HS_OnDead(object sender, System.EventArgs e) {
+        LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
+        Destroy(gameObject);
+    }
+
+     void OnDestroy() {
+        TurnSystem.Instance.OnTurnChanged -= TS_OnTurnChanged;
+        HealthSystem.OnDead -= HS_OnDead;
     }
 }

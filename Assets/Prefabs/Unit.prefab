@@ -148,6 +148,8 @@ GameObject:
   - component: {fileID: 8158596079268089368}
   - component: {fileID: 6774555559939807015}
   - component: {fileID: 8762390111235259741}
+  - component: {fileID: 4313667698102306250}
+  - component: {fileID: 5860676000448834545}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -184,8 +186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9559b8393474c1c498b4fde6ef14802e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  health: 100
-  maxHealth: 100
   isEnemy: 0
   actionPoints: 2
 --- !u!65 &8158596079268089368
@@ -238,6 +238,34 @@ MonoBehaviour:
   animator: {fileID: 6218427481840725287}
   bulletProjectilePrefab: {fileID: 3868243637194226106, guid: 0d839eedafccbf54a82be9ba3d1fefca, type: 3}
   shootPointTransform: {fileID: 7836369365877918126}
+--- !u!114 &4313667698102306250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752439575101431834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa6606d75f417c7409bf1e116f7a203b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HealthSystem
+  health: 100
+  maxHealth: 100
+--- !u!114 &5860676000448834545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752439575101431834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97e7f294f78cc84aad00fe6dd77e636, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitRagdoll
+  unitRagdollPrefab: {fileID: 2745892423676798249, guid: 5344a096e6509a042b63197e2e015bf7, type: 3}
+  rootBoneTransform: {fileID: 6273789350655189739}
 --- !u!1001 &4778882365440728939
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1708,5 +1736,10 @@ Transform:
 --- !u!4 &6273676679241855417 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4471465929434822, guid: 8dbb22b9d53a7664b8619d4c6888d92f, type: 3}
+  m_PrefabInstance: {fileID: 6277861153029068671}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6273789350655189739 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4375341953709460, guid: 8dbb22b9d53a7664b8619d4c6888d92f, type: 3}
   m_PrefabInstance: {fileID: 6277861153029068671}
   m_PrefabAsset: {fileID: 0}

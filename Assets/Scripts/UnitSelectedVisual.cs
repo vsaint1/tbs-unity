@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
@@ -25,26 +26,20 @@ public class UnitSelectedVisual : MonoBehaviour {
 
 
     void UAS_OnSelectedUnitChanged(object sender, System.EventArgs e) {
-        if (UnitActionSystem.Instance.GetSelectedUnit() == unit) {
-            if (meshRenderer != null)
-                meshRenderer.enabled = true;
-        }
-        else {
-            if (meshRenderer != null)
-
-                meshRenderer.enabled = false;
-        }
+       UpdateVisual();
     }
 
 
     void UpdateVisual() {
         if (UnitActionSystem.Instance.GetSelectedUnit() == unit) {
-            if (meshRenderer != null)
-                meshRenderer.enabled = true;
+            meshRenderer.enabled = true;
         }
         else {
-            if (meshRenderer != null)
-                meshRenderer.enabled = false;
+            meshRenderer.enabled = false;
         }
+    }
+
+    void OnDestroy() {
+        UnitActionSystem.Instance.OnSelectedUnitChanged -= UAS_OnSelectedUnitChanged;
     }
 }
