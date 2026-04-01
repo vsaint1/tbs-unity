@@ -55,10 +55,6 @@ public class MoveAction : BaseAction {
 
     public void Move(GridPosition gridPosition) {
         targetPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-        if (!IsValidActionGridPosition(gridPosition)) {
-            Debug.LogError($"Unit: {Unit.name} tried to move to invalid position {gridPosition}");
-            return;
-        }
 
         StartAction();
     }

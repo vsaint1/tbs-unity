@@ -71,9 +71,13 @@ public class UnitActionSystem : MonoBehaviour {
 
     void HandleSelectedAction() {
 
+        GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
+        if (!selectedAction.IsValidActionGridPosition(gridPosition)) {
+            Debug.LogError($"Invalid {selectedAction.GetActionName()} target at {gridPosition}.");
+            return;
+        }
 
         if (selectedUnit.TrySpendActionPoints(selectedAction)) {
-            GridPosition gridPosition = LevelGrid.Instance.GetGridPosition(MouseWorld.GetPosition());
             selectedAction.TakeAction(gridPosition);
             OnActionStarted?.Invoke(this, EventArgs.Empty);
         }
